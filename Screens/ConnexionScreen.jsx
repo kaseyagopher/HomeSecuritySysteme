@@ -9,12 +9,23 @@ const HEIGHT = Dimensions.get('window').height;
 
 const ConnexionScreen = ({ navigation }) => {
     const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
     const handlePressSignup = () => {
         navigation.navigate('Signup');
     };
-    const handlePressHome =()=>{
-        navigation.navigate('MainApp')
+    const handlePressHome = () => {
+        // Remplacer la logique de connexion par une simple navigation ou une vérification fictive
+        if (email === "" || password === "") {
+            setError("Veuillez remplir tous les champs");
+            return;
+        }
+        // Ici, vous pouvez ajouter une logique de vérification factice ou appeler une API
+        // Pour l'instant, on simule une connexion réussie
+        setError("");
+        navigation.navigate('MainApp');
     };
 
     return (
@@ -22,22 +33,21 @@ const ConnexionScreen = ({ navigation }) => {
             {/*<LinearGradient colors={['#4c669d', '#3b5998', '#192f6a']}>*/}
                 <View style={styles.container2}>
                     <Text style={styles.title}>Connexion</Text>
-                    <View style={styles.profileContainer}>
-                        <Image style={styles.img} source={require('../assets/images/profileIcon.jpg')} />
-                        <TouchableOpacity style={styles.cameraIcon}>
-                            <Icon name="camera" size={24} color="#007BFF" />
-                        </TouchableOpacity>
-                    </View>
+
                     <View style={styles.input_container}>
                         <TextInput
                             style={styles.input}
                             placeholder="Entrez votre email ou nom d'utilisateur"
+                            value={email}
+                            onChangeText={setEmail}
                         />
                         <View style={styles.passwordContainer}>
                             <TextInput
                                 style={styles.input}
                                 placeholder="Entrez votre mot de passe"
                                 secureTextEntry={!showPassword}
+                                value={password}
+                                onChangeText={setPassword}
                             />
                             <TouchableOpacity
                                 style={styles.eyeIcon}
@@ -51,10 +61,14 @@ const ConnexionScreen = ({ navigation }) => {
                             </TouchableOpacity>
                         </View>
                     </View>
+                    {error ? (
+                        <Text style={{ color: 'red', textAlign: 'center', marginTop: 10 }}>{error}</Text>
+                    ) : null}
                     <View>
                         <TouchableOpacity style={styles.button} onPress={handlePressHome}>
                             <Text style={styles.buttonText}>Se connecter</Text>
                         </TouchableOpacity>
+
                         <View style={styles.inlineContainer}>
                             <Text>Avez-vous un compte?</Text>
                             <TouchableOpacity onPress={handlePressSignup}>
