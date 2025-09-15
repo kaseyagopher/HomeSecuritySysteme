@@ -7,6 +7,9 @@ import {NavigationContainer} from "@react-navigation/native";
 import SignupScreen from "./Screens/SignupScreen";
 import HomeScreen from "./components/HomeScreen";
 import MainApp from "./Screens/MainApp";
+import LedControl from "./Screens/LedControl";
+import AddUserScreen from "./Screens/AddUserScreen";
+import User from "./components/User";
 const Stack = createStackNavigator()
 export default function App() {
 
@@ -20,8 +23,8 @@ export default function App() {
           <Stack.Screen name={'Home'} component={HomeScreen}/>
           <Stack.Screen name={'Signup'} component={SignupScreen}/>
           <Stack.Screen name={'MainApp'} component={MainApp}/>
-
-
+            <Stack.Screen name="AddUserScreen" component={AddUserScreen} options={{ title: 'Ajouter un utilisateur' }} />
+            <Stack.Screen name={"UserList"} component={User}/>
         </Stack.Navigator>
       </NavigationContainer>
   );
